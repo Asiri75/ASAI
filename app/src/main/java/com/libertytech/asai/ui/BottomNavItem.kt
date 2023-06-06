@@ -9,4 +9,6 @@ sealed class BottomNavItem(var title:String, var icon:Int, var screen_route:Stri
     object Maxime : BottomNavItem("Maxime", R.drawable.ic_maxime,"Maxime")
 
     object Benoit: BottomNavItem("Benoit", R.drawable.ic_dollar_benoit, "benoit")
+    object Marius: BottomNavItem("Marius", R.drawable.baseline_question_answer_24, "marius")
+
 }
