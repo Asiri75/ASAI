@@ -23,6 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import com.libertytech.asai.R
 import com.libertytech.asai.screens.HomeScreen
 import com.libertytech.asai.screens.benoit.BenoitScreen
+import com.libertytech.asai.screens.LukasScreen
 import com.libertytech.asai.ui.theme.ASAITheme
 
 class MainActivity : ComponentActivity() {
@@ -47,6 +48,9 @@ fun NavigationGraph(navController: NavHostController) {
         composable(BottomNavItem.Benoit.screen_route){
             BenoitScreen()
         }
+        composable(BottomNavItem.Lukas.screen_route) {
+            LukasScreen()
+        }
     }
 }
 
@@ -54,6 +58,7 @@ fun NavigationGraph(navController: NavHostController) {
 fun BottomNavigationComposant(navController: NavController) {
     val items = listOf(
         BottomNavItem.Home,
+        BottomNavItem.Lukas,
         BottomNavItem.Benoit
     )
     BottomNavigation(
