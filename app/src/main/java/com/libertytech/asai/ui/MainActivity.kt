@@ -22,6 +22,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.libertytech.asai.R
 import com.libertytech.asai.screens.HomeScreen
+import com.libertytech.asai.screens.Maxime.MaximeScreen
 
 import com.libertytech.asai.screens.benoit.BenoitScreen
 import com.libertytech.asai.screens.LukasScreen
@@ -51,14 +52,17 @@ fun NavigationGraph(navController: NavHostController) {
         composable(BottomNavItem.Benoit.screen_route){
             BenoitScreen()
         }
-        composable(BottomNavItem.Lukas.screen_route) {
+        composable(BottomNavItem.Lukas.screen_route){
             LukasScreen()
         }
-        composable(BottomNavItem.Recipes.screen_route) {
+        composable(BottomNavItem.Recipes.screen_route){
             RecipeScreen()
         }
         composable(BottomNavItem.Marius.screen_route) {
             MariusScreen()
+        }
+        composable(BottomNavItem.Maxime.screen_route){
+            MaximeScreen()
         }
     }
 }
@@ -69,7 +73,8 @@ fun BottomNavigationComposant(navController: NavController) {
         BottomNavItem.Home,
         BottomNavItem.Recipes,
         BottomNavItem.Lukas,
-        BottomNavItem.Benoit
+        BottomNavItem.Benoit,
+        BottomNavItem.Maxime
     )
     BottomNavigation(
         backgroundColor = colorResource(id = R.color.teal_200),
