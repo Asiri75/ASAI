@@ -22,6 +22,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.libertytech.asai.R
 import com.libertytech.asai.screens.HomeScreen
+import com.libertytech.asai.screens.benoit.BenoitScreen
 import com.libertytech.asai.ui.theme.ASAITheme
 
 class MainActivity : ComponentActivity() {
@@ -41,6 +42,10 @@ fun NavigationGraph(navController: NavHostController) {
     NavHost(navController, startDestination = BottomNavItem.Home.screen_route) {
         composable(BottomNavItem.Home.screen_route) {
             HomeScreen()
+
+        }
+        composable(BottomNavItem.Benoit.screen_route){
+            BenoitScreen()
         }
     }
 }
@@ -48,7 +53,8 @@ fun NavigationGraph(navController: NavHostController) {
 @Composable
 fun BottomNavigationComposant(navController: NavController) {
     val items = listOf(
-        BottomNavItem.Home
+        BottomNavItem.Home,
+        BottomNavItem.Benoit
     )
     BottomNavigation(
         backgroundColor = colorResource(id = R.color.teal_200),
