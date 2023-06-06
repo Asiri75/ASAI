@@ -24,6 +24,7 @@ import com.libertytech.asai.R
 import com.libertytech.asai.screens.HomeScreen
 import com.libertytech.asai.screens.RecipeScreen
 import com.libertytech.asai.screens.benoit.BenoitScreen
+import com.libertytech.asai.screens.LukasScreen
 import com.libertytech.asai.ui.theme.ASAITheme
 
 class MainActivity : ComponentActivity() {
@@ -43,6 +44,13 @@ fun NavigationGraph(navController: NavHostController) {
     NavHost(navController, startDestination = BottomNavItem.Home.screen_route) {
         composable(BottomNavItem.Home.screen_route) {
             HomeScreen()
+
+        }
+        composable(BottomNavItem.Benoit.screen_route){
+            BenoitScreen()
+        }
+        composable(BottomNavItem.Lukas.screen_route) {
+            LukasScreen()
         }
     }
 }
@@ -52,6 +60,7 @@ fun BottomNavigationComposant(navController: NavController) {
     val items = listOf(
         BottomNavItem.Home,
                 BottomNavItem.Recipes,
+        BottomNavItem.Lukas,
         BottomNavItem.Benoit
     )
     BottomNavigation(
