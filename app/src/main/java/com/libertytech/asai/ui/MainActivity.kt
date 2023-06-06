@@ -22,6 +22,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.libertytech.asai.R
 import com.libertytech.asai.screens.HomeScreen
+import com.libertytech.asai.screens.RecipeScreen
 import com.libertytech.asai.ui.theme.ASAITheme
 
 class MainActivity : ComponentActivity() {
@@ -42,13 +43,17 @@ fun NavigationGraph(navController: NavHostController) {
         composable(BottomNavItem.Home.screen_route) {
             HomeScreen()
         }
+        composable(BottomNavItem.Recipes.screen_route) {
+            RecipeScreen()
+        }
     }
 }
 
 @Composable
 fun BottomNavigationComposant(navController: NavController) {
     val items = listOf(
-        BottomNavItem.Home
+        BottomNavItem.Home,
+                BottomNavItem.Recipes
     )
     BottomNavigation(
         backgroundColor = colorResource(id = R.color.teal_200),
