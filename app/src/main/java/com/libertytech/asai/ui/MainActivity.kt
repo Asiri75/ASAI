@@ -79,7 +79,8 @@ fun BottomNavigationComposant(navController: NavController) {
         BottomNavItem.Lukas,
         BottomNavItem.Benoit,
         BottomNavItem.Maxime,
-        BottomNavItem.Aymeric
+        BottomNavItem.Aymeric,
+        BottomNavItem.Marius
     )
     BottomNavigation(
         backgroundColor = colorResource(id = R.color.teal_200),
