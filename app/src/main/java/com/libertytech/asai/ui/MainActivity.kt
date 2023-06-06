@@ -25,6 +25,7 @@ import com.libertytech.asai.screens.HomeScreen
 
 import com.libertytech.asai.screens.benoit.BenoitScreen
 import com.libertytech.asai.screens.LukasScreen
+import com.libertytech.asai.screens.MariusScreen
 import com.libertytech.asai.screens.RecipeScreen
 import com.libertytech.asai.ui.theme.ASAITheme
 
@@ -55,6 +56,9 @@ fun NavigationGraph(navController: NavHostController) {
         }
         composable(BottomNavItem.Recipes.screen_route) {
             RecipeScreen()
+        }
+        composable(BottomNavItem.Marius.screen_route) {
+            MariusScreen()
         }
     }
 }
