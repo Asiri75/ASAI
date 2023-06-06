@@ -46,10 +46,15 @@ fun NavigationGraph(navController: NavHostController) {
     NavHost(navController, startDestination = BottomNavItem.Home.screen_route) {
         composable(BottomNavItem.Home.screen_route) {
             HomeScreen()
-
         }
         composable(BottomNavItem.Benoit.screen_route){
             BenoitScreen()
+        }
+        composable(BottomNavItem.Lukas.screen_route){
+            LukasScreen()
+        }
+        composable(BottomNavItem.Recipes.screen_route){
+            RecipeScreen()
         }
         composable(BottomNavItem.Maxime.screen_route){
             MaximeScreen()
@@ -61,6 +66,8 @@ fun NavigationGraph(navController: NavHostController) {
 fun BottomNavigationComposant(navController: NavController) {
     val items = listOf(
         BottomNavItem.Home,
+        BottomNavItem.Recipes,
+        BottomNavItem.Lukas,
         BottomNavItem.Benoit,
         BottomNavItem.Maxime
     )
