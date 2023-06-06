@@ -58,8 +58,7 @@ fun NavigationGraph(navController: NavHostController) {
 fun BottomNavigationComposant(navController: NavController) {
     val items = listOf(
         BottomNavItem.Home,
-        BottomNavItem.Lukas
-        BottomNavItem.Home,
+        BottomNavItem.Lukas,
         BottomNavItem.Benoit
     )
     BottomNavigation(
