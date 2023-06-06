@@ -28,6 +28,7 @@ import com.libertytech.asai.screens.benoit.BenoitScreen
 import com.libertytech.asai.screens.LukasScreen
 import com.libertytech.asai.screens.MariusScreen
 import com.libertytech.asai.screens.RecipeScreen
+import com.libertytech.asai.screens.aymeric.AymericScreen
 import com.libertytech.asai.ui.theme.ASAITheme
 
 class MainActivity : ComponentActivity() {
@@ -64,6 +65,9 @@ fun NavigationGraph(navController: NavHostController) {
         composable(BottomNavItem.Maxime.screen_route){
             MaximeScreen()
         }
+        composable(BottomNavItem.Aymeric.screen_route){
+            AymericScreen()
+        }
     }
 }
 
@@ -74,7 +78,8 @@ fun BottomNavigationComposant(navController: NavController) {
         BottomNavItem.Recipes,
         BottomNavItem.Lukas,
         BottomNavItem.Benoit,
-        BottomNavItem.Maxime
+        BottomNavItem.Maxime,
+        BottomNavItem.Aymeric
     )
     BottomNavigation(
         backgroundColor = colorResource(id = R.color.teal_200),
