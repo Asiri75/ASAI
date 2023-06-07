@@ -1,18 +1,13 @@
 package com.libertytech.asai.usecases
-
+//Made by Baptiste 07/06/2023
 import com.libertytech.asai.repositories.OpenAiRepository
 
 class SearchRecipesUseCase {
-
-    companion object {
-        const val RECIPES_NAME_REQUEST = "Propose moi une recette avec ces ingredients "
-    }
     private val openAiRepository:OpenAiRepository = OpenAiRepository()
-
-    suspend fun execute(ingredients: String): String {
-        val request = "$RECIPES_NAME_REQUEST $ingredients"
-        val response = openAiRepository.callChatGPT(request)
-        return response.choices.first().text
+    companion object {
+        const val RECIPES_NAME_REQUEST = "Donne moi, sous forme de liste, les ingrédients pour la recette de :"
     }
-
+    suspend fun execute(ingredients: String): String {
+        return openAiRepository.callChatGPT("$RECIPES_NAME_REQUEST $ingredients ?").choices.first().text.replace("$RECIPES_NAME_REQUEST $ingredients ?", "")
+    }
 }
