@@ -9,15 +9,20 @@ class OpenAiRepository {
 
     private val openAI = OpenAI("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")
 
-    suspend fun callChatGPT(prompt: String): TextCompletion {
-        return openAI.completion(
-            CompletionRequest(
-                model = ModelId("text-curie-001"),
-                prompt = prompt,
-                echo = true,
-                maxTokens = 300
+    suspend fun callChatGPT(prompt: String): TextCompletion? {
+        return try {
+            openAI.completion(
+                CompletionRequest(
+                    model = ModelId("text-curie-001"),
+                    prompt = prompt,
+                    echo = true,
+                    maxTokens = 300
+                )
             )
-        )
+        }catch (e: Exception){
+            e.printStackTrace()
+            null
+        }
     }
 
 }
