@@ -1,26 +1,30 @@
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 data class LukasUiState(
-        val currentScrambledWord: String = ""
+    val searchFinalResult: String = "",
 )
 
 class LukasViewModel: ViewModel() {
-    private lateinit var currentWord: String
+    private val lukasRoadTripGeneratorUseCase = LukasRoadTripGeneratorUseCase()
+
     private val _uiState = MutableStateFlow(LukasUiState())
     val uiState: StateFlow<LukasUiState> = _uiState.asStateFlow()
 
-    fun resetWord() {
-        _uiState.value = LukasUiState(currentScrambledWord = "Hello Lukas")
-    }
+    fun makeRequest(roadTripDescription: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = lukasRoadTripGeneratorUseCase.execute(roadTripDescription)
 
-    fun handleClick() {
-       _uiState.value = LukasUiState(currentScrambledWord = "Yeah, you clicked the button")
-    }
-
-    init {
-        resetWord()
+            withContext(Dispatchers.Main) {
+                _uiState.value = LukasUiState(response.choices.first().text)
+            }
+        }
     }
 }
