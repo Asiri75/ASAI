@@ -26,15 +26,15 @@ import androidx.compose.material.TextField
 
 @Composable
 fun AymericScreen(
-    ActivityViewModel: ActivityViewModel = viewModel()
+    activityViewModel: ActivityViewModel = viewModel()
 ) {
-    val activityUiState by ActivityViewModel.uiState.collectAsState()
-    AymericLayout(ActivityViewModel = ActivityViewModel, ActivityUiState = activityUiState)
+    val activityUiState by activityViewModel.uiState.collectAsState()
+    AymericLayout(activityViewModel = activityViewModel, activityUiState = activityUiState)
 }
 @Composable
 fun AymericLayout(
-    ActivityViewModel: ActivityViewModel,
-    ActivityUiState: ActivityUiState
+    activityViewModel: ActivityViewModel,
+    activityUiState: ActivityUiState
 ) {
     val activityDescription = remember { mutableStateOf(TextFieldValue("")) }
 
@@ -50,6 +50,10 @@ fun AymericLayout(
             style = typography.h1,
             fontSize = 25.sp
         )
+        TextField(
+            value = activityDescription.value,
+            onValueChange = { activityDescription.value = it },
+        )
 
         Column(
             modifier = Modifier
@@ -60,7 +64,7 @@ fun AymericLayout(
         ) {
             Button(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { ActivityViewModel.makeRequest(activityDescription.value.text) }
+                onClick = { activityViewModel.makeRequest(activityDescription.value.text) }
             ) {
                 Text(
                     text = "Demander",
@@ -68,6 +72,6 @@ fun AymericLayout(
                 )
             }
         }
-        Text(text = ActivityUiState.searchFinalResult, fontSize = 16.sp, style = typography.body1)
+        Text(text = activityUiState.searchFinalResult, fontSize = 16.sp, style = typography.body1)
     }
 }
