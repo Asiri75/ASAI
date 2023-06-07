@@ -13,21 +13,21 @@ import kotlinx.coroutines.withContext
 class BenoitViewModel: ViewModel() {
 
     private val _uiState = MutableStateFlow(BenoitUIState())
-
+    private var history = emptyArray<String>()
     val uiState: StateFlow<BenoitUIState> = _uiState.asStateFlow()
     private val salaryGeneratorUseCase: SalaryGeneratorUseCase = SalaryGeneratorUseCase()
 
     fun makeRequest(job: String, xp: String){
         CoroutineScope(Dispatchers.IO).launch {
             val response = salaryGeneratorUseCase.execute(job, xp)
-
+            history += "$job, $xp"
             withContext(Dispatchers.Main) {
-                _uiState.value = BenoitUIState(response.choices.first().text)
+                _uiState.value = BenoitUIState(response?.choices?.first()?.text.orEmpty(), history)
             }
         }
     }
     init {
-        var title = BenoitUIState("Benoit Requillart")
-        _uiState.value = title
+        var content = BenoitUIState("Benoit Requillart")
+        _uiState.value = content
     }
 }

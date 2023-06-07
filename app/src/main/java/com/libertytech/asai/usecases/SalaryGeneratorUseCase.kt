@@ -10,7 +10,7 @@ class SalaryGeneratorUseCase {
         const val prepromtdeux = "années d'expérience en te basant seulement sur ces points"
     }
     private val openAiRepository : OpenAiRepository = OpenAiRepository()
-    suspend fun execute(job: String, xp: String): TextCompletion {
+    suspend fun execute(job: String, xp: String): TextCompletion? {
         try {
             return openAiRepository.callChatGPT("$prepromtun $job $joiner $xp $prepromtdeux")
         }catch (e: Exception){
