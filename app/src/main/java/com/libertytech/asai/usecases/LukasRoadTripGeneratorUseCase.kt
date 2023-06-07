@@ -1,14 +1,13 @@
-import com.aallam.openai.api.completion.TextCompletion
 import com.libertytech.asai.repositories.OpenAiRepository
 
 class LukasRoadTripGeneratorUseCase {
     private val openAiRepository : OpenAiRepository = OpenAiRepository()
 
     companion object{
-        const val ROADTRIP_REQUEST = "Donne moi une liste de 5 destinations à : "
+        const val ROADTRIP_REQUEST_START = "Pourriez-vous me donner une liste de 5 choses incontournables à faire et à voir en "
     }
 
-    suspend fun execute(prompt: String): TextCompletion {
-        return openAiRepository.callChatGPT("$ROADTRIP_REQUEST $prompt.")
+    suspend fun execute(prompt: String): String {
+        return openAiRepository.callChatGPT("$ROADTRIP_REQUEST_START $prompt ?").choices.first().text.replace("$ROADTRIP_REQUEST_START $prompt ?", "")
     }
 }
