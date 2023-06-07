@@ -131,7 +131,7 @@ fun RecipeLayout(recipeViewModel: RecipeViewModel, currentTitle: String, modifie
 
 @Composable
 fun AlertPopup(onDismiss: () -> Unit) {
-    val videoId = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    val videoId = "dQw4w9WgXcQ"
     AlertDialog(
         onDismissRequest = { onDismiss() },
         title = {
