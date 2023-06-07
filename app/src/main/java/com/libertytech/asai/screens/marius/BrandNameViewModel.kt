@@ -1,58 +1,30 @@
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.libertytech.asai.usecases.SearchBrandNamesUseCase
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class BrandNameViewModel : ViewModel() {
-    private val _uiState = MutableStateFlow(BrandNameStateUI())
-    val uiState: StateFlow<BrandNameStateUI> = _uiState.asStateFlow()
 
+data class BrandNameUiState(
+    val searchFinalResult: String = "",
+)
+
+class BrandNameViewModel: ViewModel() {
     private val searchBrandNamesUseCase = SearchBrandNamesUseCase()
-    private val _textInput = mutableStateOf("")
 
-    private val _isLoading = mutableStateOf(false)
-    val isLoading: State<Boolean> = _isLoading
-    var textInput: String
-        get() = _textInput.value
-        set(value) {
-            _textInput.value = value
-        }
+    private val _uiState = MutableStateFlow(BrandNameUiState())
+    val uiState: StateFlow<BrandNameUiState> = _uiState.asStateFlow()
 
-    init {
-        resetScreen()
-    }
-
-    fun resetScreen() {
-        _uiState.value = BrandNameStateUI(currentScrambledWord = "text")
-    }
-
-    fun handleClick() {
-        if (textInput.isNotEmpty()) {
-            val description = textInput
-            makeRequest(description)
-        }
-    }
-
-    private fun makeRequest(description: String) {
-        _isLoading.value = true
-        viewModelScope.launch {
-            val response = searchBrandNamesUseCase.execute(description)
+    fun makeRequest(brandDescription: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = searchBrandNamesUseCase.execute(brandDescription)
 
             withContext(Dispatchers.Main) {
-                _uiState.value = BrandNameStateUI(currentScrambledWord = response)
-                _isLoading.value = false
+                _uiState.value = BrandNameUiState(response.choices.first().text)
             }
         }
     }
 }
-
-data class BrandNameStateUI(
-    val currentScrambledWord: String = ""
-)
