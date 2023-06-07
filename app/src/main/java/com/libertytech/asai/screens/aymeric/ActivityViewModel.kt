@@ -1,6 +1,6 @@
 package com.libertytech.asai.screens.aymeric
 
-import MariusUiState
+
 import androidx.lifecycle.ViewModel
 import com.libertytech.asai.usecases.SearchActivityNamesUseCase
 import kotlinx.coroutines.CoroutineScope
@@ -12,30 +12,25 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class ActivityViewModel : ViewModel() {
+
     // Game UI state
-    private val _uiState = MutableStateFlow<String>("")
-    val uiState: StateFlow<String> = _uiState.asStateFlow()
-    val searchActivityNamesUseCase = SearchActivityNamesUseCase()
+    data class ActivityUiState(
+        val searchFinalResult: String = "",
+    )
 
-    fun handleClick() {
-        makeRequest("Test")
-    }
+    class ActivityViewModel: ViewModel() {
+        private val searchActivityNamesUseCase = SearchActivityNamesUseCase()
 
+        private val _uiState = MutableStateFlow(ActivityUiState())
+        val uiState: StateFlow<ActivityUiState> = _uiState.asStateFlow()
 
-    fun makeRequest(activityDescription: String){
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = searchActivityNamesUseCase.execute(activityDescription)
+        fun makeRequest(activityDescription: String) {
+            CoroutineScope(Dispatchers.IO).launch {
+                val response = searchActivityNamesUseCase.execute(activityDescription)
 
-            withContext(Dispatchers.Main) {
-                _uiState.value = ActivityUiState(response.choices.first().text).toString()
+                withContext(Dispatchers.Main) {
+                    _uiState.value = ActivityUiState(response.choices.first().text)
+                }
             }
         }
     }
-    init{
-        _uiState.value = "Paris"
-    }
-
-}
-
-

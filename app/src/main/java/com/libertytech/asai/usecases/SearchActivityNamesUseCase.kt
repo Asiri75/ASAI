@@ -6,16 +6,14 @@ import com.libertytech.asai.repositories.OpenAiRepository
 
 class SearchActivityNamesUseCase {
 
-    companion object {
-        const val ACTIVITY_NAME_REQUEST = "Donne moi 4 activité à faire dans la ville suivante :"
-    }
-val openAiRepository = OpenAiRepository()
+    private val openAiRepository : OpenAiRepository = OpenAiRepository()
 
-    suspend fun execute(activityDescription: String){
-        openAiRepository.callChatGPT(
-            "$ACTIVITY_NAME_REQUEST $activityDescription"
-        )
+    companion object{
+        const val ACTIVITY_REQUEST = "Donne moi une liste de 5 activités à : "
     }
 
+    suspend fun execute(prompt: String): TextCompletion {
+        return openAiRepository.callChatGPT("$ACTIVITY_REQUEST $prompt.")
+    }
 }
 
