@@ -26,7 +26,7 @@ import com.libertytech.asai.screens.Maxime.MaximeScreen
 
 import com.libertytech.asai.screens.benoit.BenoitScreen
 import com.libertytech.asai.screens.LukasScreen
-import com.libertytech.asai.screens.MariusScreen
+import com.libertytech.asai.screens.marius.MariusScreen
 import com.libertytech.asai.screens.aymeric.AymericScreen
 import com.libertytech.asai.screens.baptiste.RecipeScreen
 import com.libertytech.asai.ui.theme.ASAITheme

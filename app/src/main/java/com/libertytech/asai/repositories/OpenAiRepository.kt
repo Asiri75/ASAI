@@ -7,7 +7,7 @@ import com.aallam.openai.client.OpenAI
 
 class OpenAiRepository {
 
-    private val openAI = OpenAI("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")
+    private val openAI = OpenAI("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")
 
     suspend fun callChatGPT(prompt: String): TextCompletion {
         return openAI.completion(
